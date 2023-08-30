@@ -22,7 +22,7 @@ class HeroRepositoryImpl : HeroRepository {
         Hero(
             id = 1,
             name = "Sasuke",
-            image = "/images/sasuke.jpg",
+            image = "https://c4.wallpaperflare.com/wallpaper/370/127/644/uchiha-sasuke-rinnegan-eternal-mangekyou-sharingan-naruto-shippuuden-wallpaper-preview.jpg",
             about = "Sasuke Uchiha (うちはサスケ, Uchiha Sasuke) is one of the last surviving members of Konohagakure's Uchiha clan. After his older brother, Itachi, slaughtered their clan, Sasuke made it his mission in life to avenge them by killing Itachi. He is added to Team 7 upon becoming a ninja and, through competition with his rival and best friend, Naruto Uzumaki.",
             rating = 5.0,
             power = 98,
@@ -405,6 +405,7 @@ class HeroRepositoryImpl : HeroRepository {
             prevPage = calculatePage(page = page)[PREVIOUS_PAGE_KEY],
             nextPage = calculatePage(page = page)[NEXT_PAGE_KEY],
             heroes = heroes[page]!!,
+            lastUpdated = System.currentTimeMillis()
         )
     }
 
@@ -417,6 +418,7 @@ class HeroRepositoryImpl : HeroRepository {
         if (page in 2..5) {
             prevPage = prevPage?.minus(1)
         }
+        // Boundry checks
         if (page == 1) {
             prevPage = null
         }
@@ -440,7 +442,7 @@ class HeroRepositoryImpl : HeroRepository {
         return if (!query.isNullOrEmpty()) {
             heroes.forEach { (_, heores) ->
                 heores.forEach { hero ->
-                    if (hero.name.lowercase().contentEquals(query.lowercase())) {
+                    if (hero.name.lowercase().startsWith(query.lowercase())) {
                         foundedHeroes.add(hero)
                     }
                 }
