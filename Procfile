@@ -1,0 +1,1 @@
+web: build/install/com.naruto.sasukeserver/bin/com.naruto.sasukeserver
