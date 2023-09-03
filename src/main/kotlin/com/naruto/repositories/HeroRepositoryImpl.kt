@@ -18,6 +18,7 @@ class HeroRepositoryImpl : HeroRepository {
         )
     }
 
+
     override val page1 = listOf(
         Hero(
             id = 1,
